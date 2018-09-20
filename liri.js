@@ -15,7 +15,7 @@ var whatToSearch = process.argv.slice(3).join('');
 function concertThis() {
     var key = keys.bandsintown.key;
     if (!whatToRun){
-        whatToRun = "paramore";
+        whatToRun = "turnover";
     } else{
         request ("https://rest.bandsintown.com/artists/" + whatToSearch + "/events?app_id=" + key, function(err, result, body){
             if (err){
@@ -46,8 +46,7 @@ function spotifyThisSong() {
         if (err) {
             console.log(err);
         } else {
-            var spotifyData = data;
-            var songData = spotifyData.tracks.items[0];
+            var songData = data.tracks.items[0];
             var songArray = [
                 "Artist(s): " + songData.artists[0].name,
                 "Song: " + songData.name,
@@ -60,3 +59,19 @@ function spotifyThisSong() {
 };
 
 // function for MOVIE-THIS \\
+function movieThis() {
+    var key = keys.omdb.apikey;
+    if (!whatToRun){
+        whatToRun = "Open Your Eyes";
+    }
+    request("http://www.omdbapi.com/?t=" + whatToSearch + "&y=&plot=short&apikey=" + key, function(err, response, body){
+        if (err){
+            console.log(err);
+        } else if (!err && statusCode === 200) {
+            var movieData = JSON.parse(body);
+            var movieArray = [
+                
+            ]
+        }
+    })
+}
